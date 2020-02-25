@@ -1,24 +1,14 @@
-// Function: Generate
+
+var x = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+";
+
+var length = 12;
+
 function generatePassword() {
-
-    var password = "";
-
-    // var complexity = 12;
-
-    var value = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+";
-
-    // for(var i = 0; i <= complexity; i++){
-    // password = password + value.charAt(Math.floor(Math.random() * Math.floor(value.length - 1)));
-    // }
-
-    for (var i = 1; i < 12; i++) {
-        var password = Math.floor(Math.random() * Math.floor(value.length - 1));
-        password = password + value.charAt(password);
-
-        return password;
-
-        console.log(generatePassword);
-
+        var password = ''; 
+        for (var index = 1; index <= 12; index++) {
+            var c = Math.floor((Math.random() * x.length) + 0);
+            password = x.charAt(c);
     }
-    document.getElementById("display").value = password;
+    console.log(password);
+    document.getElementById("display").password;
 }
