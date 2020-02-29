@@ -1,5 +1,4 @@
 
-// var x = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+";
 // GIVEN I need a new, secure password
 // WHEN I click the button to generate a password
 // THEN I am presented with a series of prompts for password criteria
@@ -15,47 +14,50 @@
 // THEN a password is generated that matches the selected criteria
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
-// var length = Number(prompt("How many characters will your password be? Enter a number between 8 and 128"));
 
-var length = Number(prompt("How many characters will your password be? Enter a number between 8 and 128"));
 
-//ask for character type
-var charType = prompt("Enter a character type: special, numeric, uppercase, lowercase.");
-
-//generate password
+//generate random password function
 function generatePassword() {
-  //evaluate character type
-  var charSet = "";
-  var charTypeLower = charType.toLowerCase();
-  if( charTypeLower === "lowercase" ) {
-    charSet = "abcdefghijklmnopqrstuvwxyz";
-  } else if( charTypeLower === "uppercase" ) {
-    charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  } else if( charTypeLower === "numeric" ) {
-    charSet = "0123456789";
-  } else if( charTypeLower === "special" ) {
-    charSet = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
-  } 
+  var length = Number(prompt("How many characters would you like your password be? Please enter a digit between 8 and 128"));
+  length = parseInt(length);
+  if (length < 8 || length > 128 || !length) { // !length (is length falsey)
+    alert("Please choose a correct number length!!");
+    generatePassword();
+    return
+    // exits function
+  }
+  // use confirm statements to eval true or false 
+  var upperType = confirm("Do you want your password to have uppercase letters?");
+  var lowerType = confirm("Do you want your password to have lowercase letters?");
+  var numericType = confirm("Do you want your password to have numeric characters?");
+  var specialType = confirm("Do you want your password to have special characters?");
+  //create characterType and set character set based on user input = characterSet
+  var characterSet = "";
+  // use "if" statements and confirm w/boolean
+  if (lowerType === true) {
+    characterSet = characterSet + "abcdefghijklmnopqrstuvwxyz";
+  }
+  if (upperType === true) {
+    characterSet = characterSet + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  }
+  if (numericType === true) {
+    characterSet = characterSet + "0123456789";
+  }
+  if (specialType === true) {
+    characterSet = characterSet + " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+  }
+
   //return value
   var passWord = "";
   for (var i = 0; i < length; i++) {
-    //picks a character within charSet at index of random number
-    passWord += charSet.charAt(Math.floor(Math.random() * charSet.length));
+    //picks characters within characterSet at index of random number
+    passWord += characterSet.charAt(Math.floor(Math.random() * characterSet.length));
   }
 
-  console.log(passWord);
-  return passWord;
+  var button = document.getElementById("btn btn-info btn-large");
+
   document.getElementById("display").value = passWord;
+
+
 }
 
-// alert(generatePassword());
-
-// // function generatePassword() {
-//         var password = ''; 
-//         for (var index = 1; index <= 12; index++) {
-//             var c = Math.floor((Math.random() * x.length) + 0);
-//             password = password + x.charAt(c);
-//     }
-//     console.log(password);
-//     document.getElementById("display").value = password;
-// }
